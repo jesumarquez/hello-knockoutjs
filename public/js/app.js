@@ -33,6 +33,7 @@ $(function(){
         self.save = function(){
             var u = ko.toJSON(self.user)
             var type = self.mode() === 'new' ? 'POST' : 'PUT'
+            $.blockUI()
 
             $.ajax({
                 url: '/user',
@@ -47,6 +48,9 @@ $(function(){
                 },
                 error: function(jqXHR, textStatus, errorThrown){
                     console.error(textStatus, errorThrown)
+                },
+                complete: function () {
+                    $.unblockUI()
                 }
             })
         }
@@ -56,7 +60,7 @@ $(function(){
         }
         self.changeValue = function(user){
             var u = ko.toJSON(user)
-
+            $.blockUI()
             $.ajax({
                 url: '/user',
                 type: 'put',
@@ -68,6 +72,9 @@ $(function(){
                 },
                 error: function(jqXHR, textStatus, errorThrown){
                     console.error(textStatus, errorThrown)
+                },
+                complete: function () {
+                    $.unblockUI()
                 }
             })
         }
