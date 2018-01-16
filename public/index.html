@@ -7,19 +7,23 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Users</h1>
+    <h1>Users <span data-bind="text: mode"></span></h1>
     <button data-bind="click: newUser">Nuevo</button>
     <!-- ko with:user -->
     <input type="text" data-bind="value: name">
-    <span data-bind="text: name"></span>
+    <input type="checkbox" data-bind="checked: enabled">
     <button data-bind="click: $parent.save">Aceptar</button>
+    <button data-bind="click: $parent.cancel">Cancelar</button>
     <!-- /ko -->
-    <div data-bind="text: users().length"></div>
+    
+    <!-- ko if:mode() == 'list' -->
     <ul>
         <!-- ko foreach:users -->
-        <li><span data-bind="text: name"></span> - <span data-bind="text: enabled"></span>&nbsp;<button data-bind="click: $parent.changeValue">change</button></li>
+        <li><span data-bind="text: name"></span> - <input type="checkbox" data-bind="checked: enabled, event:{ change: $parent.changeValue }">&nbsp;<button data-bind="click: $parent.edit">Editar</button></li>
         <!-- /ko -->
     </ul>
+    <div data-bind="text: 'Total: ' + users().length"></div>
+    <!-- /ko -->
     <script src="/scripts/jquery/dist/jquery.min.js"></script>
     <script src="/scripts/knockout/build/output/knockout-latest.js"></script>
     <script src="/scripts/knockout-mapping/dist/knockout.mapping.min.js"></script>
