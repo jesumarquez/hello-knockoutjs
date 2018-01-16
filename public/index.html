@@ -8,5 +8,19 @@
 </head>
 <body>
     <h1>Hi</h1>
+    <!-- ko with:user -->
+    <input type="text" data-bind="value: name">
+    <span data-bind="text: name"></span>
+    <!-- /ko -->
+    <div data-bind="text: users().length"></div>
+    <ul>
+        <!-- ko foreach:users -->
+        <li data-bind="text: name"></li>
+        <!-- /ko -->
+    </ul>
+    <script src="/scripts/jquery/dist/jquery.min.js"></script>
+    <script src="/scripts/knockout/build/output/knockout-latest.js"></script>
+    <script src="/scripts/knockout-mapping/dist/knockout.mapping.min.js"></script>
+    <script src="/js/app.js"></script>
 </body>
 </html>
