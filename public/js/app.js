@@ -22,9 +22,6 @@ $(function(){
         /**
          * Methods
          */
-        self.changeValue = function(u){
-            //u.enabled(!u.enabled())
-        }
         self.newUser = function(){
             self.user({name: '', enabled: false})
             self.mode('new')
@@ -36,12 +33,6 @@ $(function(){
         self.save = function(){
             var u = ko.toJSON(self.user)
             var type = self.mode() === 'new' ? 'POST' : 'PUT'
-            // $.post('/user', {user: u})
-            //     .then(function(res){
-            //         ko.mapping.fromJS(res, self)
-            //         self.user(null)
-            //         self.mode('list')
-            // })
 
             $.ajax({
                 url: '/user',
@@ -62,6 +53,23 @@ $(function(){
         self.cancel = function(){
             self.user(null)
             self.mode('list')
+        }
+        self.changeValue = function(user){
+            var u = ko.toJSON(user)
+
+            $.ajax({
+                url: '/user',
+                type: 'put',
+                contentType: "application/json",
+                data: JSON.stringify({user: u}),
+                dataType: 'json',
+                success: function(res){
+                    ko.mapping.fromJS(res, self)
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.error(textStatus, errorThrown)
+                }
+            })
         }
     }
 
