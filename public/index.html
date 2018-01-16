@@ -7,15 +7,17 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hi</h1>
+    <h1>Users</h1>
+    <button data-bind="click: newUser">Nuevo</button>
     <!-- ko with:user -->
     <input type="text" data-bind="value: name">
     <span data-bind="text: name"></span>
+    <button data-bind="click: $parent.save">Aceptar</button>
     <!-- /ko -->
     <div data-bind="text: users().length"></div>
     <ul>
         <!-- ko foreach:users -->
-        <li data-bind="text: name"></li>
+        <li><span data-bind="text: name"></span> - <span data-bind="text: enabled"></span>&nbsp;<button data-bind="click: $parent.changeValue">change</button></li>
         <!-- /ko -->
     </ul>
     <script src="/scripts/jquery/dist/jquery.min.js"></script>
