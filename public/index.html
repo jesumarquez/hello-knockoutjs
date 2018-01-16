@@ -8,7 +8,8 @@
 </head>
 <body>
     <h1>Users <span data-bind="text: mode"></span></h1>
-    <button data-bind="click: newUser">Nuevo</button>
+    <button data-bind="click: newUser, visible: mode()==='list'">Nuevo</button>
+
     <!-- ko with:user -->
     <input type="text" data-bind="value: name">
     <input type="checkbox" data-bind="checked: enabled">
@@ -24,6 +25,7 @@
     </ul>
     <div data-bind="text: 'Total: ' + users().length"></div>
     <!-- /ko -->
+
     <script src="/scripts/jquery/dist/jquery.min.js"></script>
     <script src="/scripts/knockout/build/output/knockout-latest.js"></script>
     <script src="/scripts/knockout-mapping/dist/knockout.mapping.min.js"></script>
