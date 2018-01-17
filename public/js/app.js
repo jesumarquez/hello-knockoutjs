@@ -77,9 +77,28 @@ $(function(){
                     $.unblockUI()
                 }
             })
+            
+            alert('event changeValue ' + user.enabled())
+        }
+        self.myBindingChange = function (e) {
+            alert('event myBindingChange ' + e.enabled())
         }
     }
 
+    ko.bindingHandlers.myBinding = {
+        init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+            // This will be called when the binding is first applied to an element
+            // Set up any initial state, event handlers, etc. here
+            //alert('init')
+        },
+        update: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+            // This will be called once when the binding is first applied to an element,
+            // and again whenever any observables/computeds that are accessed change
+            // Update the DOM element based on the supplied values here.
+            // alert('update: ' + ko.unwrap(valueAccessor()))
+            $(element).trigger('myBindingChange')
+        }
+    }
     $.get('/user')
         .then(function (res) {
             ko.applyBindings(new UserViewModel(res))

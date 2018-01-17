@@ -17,14 +17,16 @@
     <button data-bind="click: $parent.cancel">Cancelar</button>
     <!-- /ko -->
     
-    <!-- ko if:mode() == 'list' -->
-    <ul>
-        <!-- ko foreach:users -->
-        <li><span data-bind="text: name"></span> - <input type="checkbox" data-bind="checked: enabled, event:{ change: $parent.changeValue }">&nbsp;<button data-bind="click: $parent.edit">Editar</button></li>
-        <!-- /ko -->
-    </ul>
-    <div data-bind="text: 'Total: ' + users().length"></div>
-    <!-- /ko -->
+    <!-- cko if:mode() == 'list' -->
+    <div data-bind="visible: mode() == 'list'"> 
+        <ul >
+            <!-- ko foreach:users -->
+            <li><span data-bind="text: name"></span> - <input type="checkbox" data-bind="checked: enabled, event:{ change: $parent.changeValue}">&nbsp;<button data-bind="click: $parent.edit">Editar</button></li>
+            <!-- /ko -->
+        </ul>
+        <div data-bind="text: 'Total: ' + users().length"></div>
+    </div>
+    <!-- /cko -->
 
     <script src="/scripts/jquery/dist/jquery.min.js"></script>
     <script src="/scripts/knockout/build/output/knockout-latest.js"></script>
